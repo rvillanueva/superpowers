@@ -1,0 +1,82 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=2357604445";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="row">
+          <div class="alert alert-success col-md-12" ng-show="me.birthday">
+            <h2>Thanks for wishing me a happy birthday!</h2>You're, like, basically my favorite person.
+            <br>&nbsp;
+          </div>
+          <div class="alert alert-danger col-md-12" ng-show="me.birthday == false">
+            <h2>Seriously, no birthday wish?</h2>What sort of cold-hearted monster are you? Jeez, whatever, have your superpower.
+            <br>&nbsp;
+          </div>
+        </div>
+        <div class="row">
+          <br>
+          <p class="lead">You are</p>
+          <h2>{{me.name}}</h2>
+          <h1>"{{me.hero.name}}"</h1>
+          <br>
+          <div class="col-md-4 col-md-offset-2">
+            <h4>Your Superpower</h4>
+            The ability to {{me.hero.power}}
+          </div>
+          <div class="col-md-4">
+            <h4>Arch-Nemesis</h4>
+            <a href="http://www.facebook.com/{{me.hero.enemy}}" target="_blank" class="white-link">{{userIndex[me.hero.enemy].name}}</a>
+          </div>
+        </div>
+        <br><br>
+        <div class="fb-share-button" data-href="http://birthday.mybluemix.net" data-layout="button_count"></div>
+        <br>&nbsp;
+      </div>
+    </div>
+  </div>
+
+</header>
+&nbsp;
+<div class="container">
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="col-md-4" ng-repeat="user in users | orderBy: visited">
+        <div ng-class="{'panel-default':!user.visited, 'panel-primary':user.visited}" class="panel hero-card">
+          <div class="panel-heading">
+            <strong>{{user.name}}</strong>, aka "{{user.hero.name}}"
+          </div>
+          <div class="panel-body">
+            <strong>Power</strong>
+            <br>The ability to {{user.hero.power}}
+            <br>
+            <br>
+            <strong>Arch-Nemesis:</strong>&nbsp;<a href="http://www.facebook.com/{{userIndex[user.hero.enemy].facebook.id}}" target="_blank">{{userIndex[user.hero.enemy].name}}</a>
+            <br><br>
+            <strong>Alignment</strong>
+            <span popover="a.k.a Did they wish me happy birthday?" popover-placement="top" popover-trigger="mouseenter" class="glyphicon glyphicon-question-sign"></span>:&nbsp;
+            <span ng-show="user.birthday" class="label label-primary label-lg">Hero</span>
+            <span ng-show="!user.birthday" class="label label-danger label-lg">Villain</span>
+            <br>
+            <br>
+            <i ng-show="user.visited">Their power was unlocked on {{user.visited | date:'EEEE'}} at {{user.visited | date:'ha'}}. Fear them!</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; Ryan, BAMF</p>
+    </div>
+  </footer>

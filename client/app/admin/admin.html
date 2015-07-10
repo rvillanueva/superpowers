@@ -1,0 +1,17 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+Name:&nbsp;<form ng-submit="createUser()"><input type="text" ng-model="newUser.name">&nbsp;Id:&nbsp;<input type="text" ng-model="newUser.id"><button type="submit" class="btn btn-md btn-primary">Add</button>
+</form>
+<br>
+<button class="btn btn-md btn-danger" ng-click="reroll()">Reroll</button>
+<br>&nbsp;
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="user in users">
+        <strong>{{user.name}}</strong><br>
+        <span class="text-muted">{{user._id}}, {{user.facebook.id}}</span>
+        <a ng-click="changeId(user._id)"><span class="glyphicon glyphicon-question-sign pull-right"></span></a>
+        <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+    </li>
+  </ul>
+</div>
